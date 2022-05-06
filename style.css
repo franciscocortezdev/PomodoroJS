@@ -53,3 +53,10 @@
     background-color: rgb(79, 148, 176);
 
 }
+
+.disable{
+
+    opacity: .5;
+    cursor: no-drop;
+    
+}
