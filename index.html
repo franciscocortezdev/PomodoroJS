@@ -11,7 +11,15 @@
 <body>
 
     <main class="main">
-        <section class="pomodoro">
+        
+        <div class="pomos" >
+            <button class="pomos_P">Pomodoro</button>
+            <button class="pomos_Rest">Descanso</button>
+            <button class="pomos_RestLong">Descanso largo</button>
+        </div>
+
+
+        <section class="pomodoro start active">
             <div class="pomo_time">
                 <span class="pomo_min">25</span>
                 <span class="pomo_sec">00</span>
@@ -22,7 +30,30 @@
                 <button class="parar disable">Parar</button>
             </div>
         </section>
-
+       
+        <section class="pomodoro rest  ">
+            <div class="pomo_time">
+                <span class="pomo_min">5</span>
+                <span class="pomo_sec">00</span>
+            </div>
+            
+            <div class="pomo_btns">
+                <button class="inicio">Comenzar</button>
+                <button class="parar disable">Parar</button>
+            </div>
+        </section>
+       
+        <section class="pomodoro restLong ">
+            <div class="pomo_time">
+                <span class="pomo_min">15</span>
+                <span class="pomo_sec">00</span>
+            </div>
+            
+            <div class="pomo_btns">
+                <button class="inicio">Comenzar</button>
+                <button class="parar disable">Parar</button>
+            </div>
+        </section>
     </main>
 
 

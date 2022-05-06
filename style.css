@@ -16,9 +16,10 @@
 
     width: 400px;
     background-color: green;
-    margin: 0 auto;
+    margin: 40px auto;
     padding: 40px;
     border-radius: 10px;
+    display: none;
 }
 
 .pomo_time{
@@ -33,15 +34,18 @@
     text-align: center;
     display: flex;
     justify-content: space-between;
+    
 }
 
 .inicio, 
 .parar{
+    
+    width: 155px;
     background-color: steelblue;
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    font-size: 30px;
+    padding: 10px 10px;
+    font-size: 25px;
     font-weight: bold;
     border-radius: 10px;
     
@@ -50,13 +54,52 @@
 .inicio:active,
 .parar:active{
    transform: scale(.9);
+    
+
+}
+
+.inicio:hover,
+.parar:hover{
+  
     background-color: rgb(79, 148, 176);
 
 }
 
 .disable{
-
     opacity: .5;
     cursor: no-drop;
+}
+
+.pomos{
+    width: 600px;
+  
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
     
+
+}
+
+.pomos button{
+    padding: 10px 20px;
+    background-color: green;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    flex-grow: 1;
+}
+
+
+.pomos button:active{
+    transform: scale(.9);
+    background-color: rgb(12, 162, 12);
+}
+
+
+
+.active{
+    display: block;
 }
