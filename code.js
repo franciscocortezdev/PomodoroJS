@@ -9,10 +9,12 @@ onTimer = false
 
 btnStart.addEventListener('click', ()=>{
   if(onTimer){
-    stop();
+    onTimer = false;
+    clearInterval(pomo);
     btnStart.innerHTML = 'Continuar';
     btnStop.innerHTML = 'Hecho';
   }else{
+    onTimer=true;
     counter();
     btnStart.innerHTML='Pausa'
     btnStop.classList.remove('disable');
@@ -51,18 +53,12 @@ const counter = ()=>{
     pMin.innerHTML = min;
     pSec.innerHTML = sec;
     console.log(`minuto: ${min} segundo: ${sec}`)
-    onTimer=true;
+    
   }, 1000);
 
 
 }
 
-const stop = ()=>{
-  clearInterval(pomo);
-  
-  onTimer = false;
-  
-}
 
 const stopAll = ()=>{
     clearInterval(pomo);
