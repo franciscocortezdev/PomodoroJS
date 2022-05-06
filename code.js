@@ -6,99 +6,165 @@ const btnPomo = document.querySelector('.pomos');
 const pomoStart = document.querySelector('.start');
 const pomoRest = document.querySelector('.rest');
 const pomoRestL = document.querySelector('.restLong');
-
-
 let sec = 60;
 let min = 25;
+let minR = 5;
+let minRL = 10;
 onTimer = false
 
 
-btnPomo.addEventListener('click', (e)=>{
-  console.log(e.target);
 
+
+
+pomoStart.addEventListener('click', (e)=>{
+  const btn1 = pomoStart.children[1].children[0];
+  const btn2 = pomoStart.children[1].children[1];
+  const minDisplay = pomoStart.children[0].children[0];
+  const secDisplay = pomoStart.children[0].children[1];
+
+  if(e.target.classList.contains('inicio')){
+    if(onTimer){ 
+      onTimer = false;
+      clearInterval(pomo);
+      btn1.innerHTML = 'Continuar';
+      btn2.innerHTML = 'Hecho';
+    }else{
+      onTimer=true;
+      counter(minDisplay, secDisplay, 25);
+      
+      btn1.innerHTML='Pausa'
+      btn2.classList.remove('disable');
+      btn2.innerHTML = 'Parar';
+    }         
+  }else if(e.target.classList.contains('parar')){
+    if (onTimer){
+      stopAll(btn1, btn2, minDisplay, secDisplay, 25);
+      
+    }else if(e.target.innerHTML == 'Hecho'){
+      stopAll(btn1, btn2, minDisplay, secDisplay, 25);
+      console.log('Pomo terminado');
+  }}});
+
+
+
+  pomoRest.addEventListener('click', (e)=>{
+    const btn1 = pomoRest.children[1].children[0];
+    const btn2 = pomoRest.children[1].children[1];
+    const minDisplay = pomoRest.children[0].children[0];
+    const secDisplay = pomoRest.children[0].children[1];
+  
+    if(e.target.classList.contains('inicio')){
+      if(onTimer){ 
+        onTimer = false;
+        clearInterval(pomo);
+        btn1.innerHTML = 'Continuar';
+        btn2.innerHTML = 'Hecho';
+      }else{
+        onTimer=true;
+        counter(minDisplay, secDisplay, 5);
+        
+        btn1.innerHTML='Pausa'
+        btn2.classList.remove('disable');
+        btn2.innerHTML = 'Parar';
+      }         
+    }else if(e.target.classList.contains('parar')){
+      if (onTimer){
+        stopAll(btn1, btn2, minDisplay, secDisplay, 5);
+        
+      }else if(e.target.innerHTML == 'Hecho'){
+        stopAll(btn1, btn2, minDisplay, secDisplay, 5);
+        console.log('Pomo terminado');
+    }}});
+
+
+    pomoRestL.addEventListener('click', (e)=>{
+      const btn1 = pomoRestL.children[1].children[0];
+      const btn2 = pomoRestL.children[1].children[1];
+      const minDisplay = pomoRestL.children[0].children[0];
+      const secDisplay = pomoRestL.children[0].children[1];
+    
+      if(e.target.classList.contains('inicio')){
+        if(onTimer){ 
+          onTimer = false;
+          clearInterval(pomo);
+          btn1.innerHTML = 'Continuar';
+          btn2.innerHTML = 'Hecho';
+        }else{
+          onTimer=true;
+          counter(minDisplay, secDisplay, 15);
+          
+          btn1.innerHTML='Pausa'
+          btn2.classList.remove('disable');
+          btn2.innerHTML = 'Parar';
+        }         
+      }else if(e.target.classList.contains('parar')){
+        if (onTimer){
+          stopAll(btn1, btn2, minDisplay, secDisplay, 15);
+          
+        }else if(e.target.innerHTML == 'Hecho'){
+          stopAll(btn1, btn2, minDisplay, secDisplay, 15);
+          console.log('Pomo terminado');
+      }}});
+
+
+
+
+
+btnPomo.addEventListener('click', (e)=>{
   let btn = e.target.innerHTML;
   if (btn == 'Pomodoro'){
+  
     pomoStart.classList.add('active')
     pomoRest.classList.remove('active')
     pomoRestL.classList.remove('active')
+    min = 25;
   }else if(btn == 'Descanso'){
     pomoRest.classList.add('active')
     pomoStart.classList.remove('active')
     pomoRestL.classList.remove('active')
+    
+    minR = 05;
   }else if(btn == 'Descanso largo'){
     pomoRestL.classList.add('active')
     pomoStart.classList.remove('active')
     pomoRest.classList.remove('active')
-  }
+    minRL = 10;
+}});
 
 
 
-})
-
-
-
-btnStart.addEventListener('click', ()=>{       
-  if(onTimer){ 
-    onTimer = false;
-    clearInterval(pomo);
-    btnStart.innerHTML = 'Continuar';
-    btnStop.innerHTML = 'Hecho';
-  }else{
-    onTimer=true;
-    counter();
-    btnStart.innerHTML='Pausa'
-    btnStop.classList.remove('disable');
-    btnStop.innerHTML = 'Parar';
-  }
-  
-  
-})
-
-btnStop.addEventListener('click', (e)=>{
-  if (onTimer){
-    stopAll();
-  }else if(e.target.innerHTML == 'Hecho'){
-    stopAll();
-    console.log('pomo terminado');
-  }
-  
-})
-
-const counter = ()=>{
-  
-  pomo = setInterval(()=>{
-    
-      if(min == 0 && sec == 0){
-      
-        clearInterval(pomo)
-        return  console.log('terminado');
-      }else if (sec == 0){
-          sec = 60;
-          min --;
-        
-      }
-    
+const counter = (minDisplay, secDisplay, time)=>{
+  min = time;
+  pomo = setInterval(()=>{ 
+    if(min == 0 && sec == 0){
+      clearInterval(pomo)
+      return  console.log('terminado');
+    }else if (sec == 0){
+      sec = 60;
+      min --; 
+    }
     sec --
-    pMin.innerHTML = min;
-    pSec.innerHTML = sec;
-    
-    
+    if(min == time){
+      min--;
+    }
+
+    minDisplay.innerHTML = min;
+    secDisplay.innerHTML = sec;
+
   }, 1000);
-
-
 }
 
 
-const stopAll = ()=>{
-    clearInterval(pomo);
-    sec = 60;
-    min = 25;
-    pMin.innerHTML = min;
-    pSec.innerHTML = '00';
-    btnStart.innerHTML='Comenzar'
-    btnStop.innerHTML='Parar'
-    btnStop.classList.add('disable');
-    onTimer = false;
-}
+   const stopAll = (btn1, btn2, minDisplay, secDisplay, time)=>{
+      clearInterval(pomo);
+      sec = 60;
+      min = time;
+      minDisplay.innerHTML = min;
+      secDisplay.innerHTML = '00';
+      btn1.innerHTML='Comenzar'
+      btn2.innerHTML='Parar'
+      btn2.classList.add('disable');
+      onTimer = false;
+    }
 
 
