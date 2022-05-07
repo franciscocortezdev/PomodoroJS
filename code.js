@@ -112,24 +112,36 @@ pomoStart.addEventListener('click', (e)=>{
 
 btnPomo.addEventListener('click', (e)=>{
   let btn = e.target.innerHTML;
+  let item1 = btnPomo.children[0];
+  let item2 = btnPomo.children[1];
+  let item3 = btnPomo.children[2];
   if (btn == 'Pomodoro'){
-  
+    item1.classList.add('pomo1')
+    item2.classList.remove('pomo2')
+    item3.classList.remove('pomo3')
     pomoStart.classList.add('active')
     pomoRest.classList.remove('active')
     pomoRestL.classList.remove('active')
-    min = 25;
+    
   }else if(btn == 'Descanso'){
+    item1.classList.remove('pomo1')
+    item2.classList.add('pomo2')
+    item3.classList.remove('pomo3')
     pomoRest.classList.add('active')
     pomoStart.classList.remove('active')
     pomoRestL.classList.remove('active')
     
-    minR = 05;
+    
   }else if(btn == 'Descanso largo'){
+    item1.classList.remove('pomo1')
+    item2.classList.remove('pomo2')
+    item3.classList.add('pomo3')
     pomoRestL.classList.add('active')
     pomoStart.classList.remove('active')
     pomoRest.classList.remove('active')
-    minRL = 10;
+    
 }});
+
 
 
 

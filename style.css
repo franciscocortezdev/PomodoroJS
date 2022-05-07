@@ -8,14 +8,14 @@
     font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     height: 100vh;
-    background-color: steelblue;
+    background-color: #b5b0af;
     padding: 40px;
 }
 
 .pomodoro{
 
     width: 400px;
-    background-color: green;
+    
     margin: 40px auto;
     padding: 40px;
     border-radius: 10px;
@@ -41,7 +41,7 @@
 .parar{
     
     width: 155px;
-    background-color: steelblue;
+    background-color: #714b4b;
     color: #fff;
     border: none;
     padding: 10px 10px;
@@ -55,13 +55,6 @@
 .parar:active{
    transform: scale(.9);
     
-
-}
-
-.inicio:hover,
-.parar:hover{
-  
-    background-color: rgb(79, 148, 176);
 
 }
 
@@ -81,9 +74,12 @@
 
 }
 
-.pomos button{
+.pomos_P,
+.pomos_Rest,
+.pomos_RestLong{
+
     padding: 10px 20px;
-    background-color: green;
+    background-color: #0061b3;
     color: #fff;
     font-size: 20px;
     font-weight: bold;
@@ -93,13 +89,51 @@
 }
 
 
-.pomos button:active{
+.pomos_P:active,
+.pomos_Rest:active,
+.pomos_RestLong:active{
     transform: scale(.9);
-    background-color: rgb(12, 162, 12);
+    
 }
 
+.pomos_P:hover,
+.pomos_Rest:hover,
+.pomos_RestLong:hover{
+    opacity: .8;
+    
+}
 
 
 .active{
     display: block;
 }
+
+.pomo1{
+    background-color: #154d62;
+}
+
+.pomo2{
+    background-color: #1a6e7d;
+}
+.pomo3{
+    background-color: #4998a2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
