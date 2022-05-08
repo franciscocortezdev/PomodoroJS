@@ -6,10 +6,14 @@ const btnPomo = document.querySelector('.pomos');
 const pomoStart = document.querySelector('.start');
 const pomoRest = document.querySelector('.rest');
 const pomoRestL = document.querySelector('.restLong');
+const resultPomo = document.querySelector('.status_msg');
+const progresBar = document.querySelector('.progres');
+const porcent = document.querySelector('.porcent');
+
 let sec = 60;
 let min = 25;
 let minR = 5;
-let minRL = 10;
+let minRL = 15;
 onTimer = false
 
 
@@ -21,6 +25,9 @@ pomoStart.addEventListener('click', (e)=>{
   const btn2 = pomoStart.children[1].children[1];
   const minDisplay = pomoStart.children[0].children[0];
   const secDisplay = pomoStart.children[0].children[1];
+  
+
+
 
   if(e.target.classList.contains('inicio')){
     if(onTimer){ 
@@ -28,13 +35,16 @@ pomoStart.addEventListener('click', (e)=>{
       clearInterval(pomo);
       btn1.innerHTML = 'Continuar';
       btn2.innerHTML = 'Hecho';
+      
     }else{
       onTimer=true;
-      counter(minDisplay, secDisplay, 25);
+      
+      counter1(btn1, btn2, minDisplay, secDisplay, 25);
       
       btn1.innerHTML='Pausa'
       btn2.classList.remove('disable');
       btn2.innerHTML = 'Parar';
+      resultPomo.classList.remove('active');
     }         
   }else if(e.target.classList.contains('parar')){
     if (onTimer){
@@ -42,10 +52,11 @@ pomoStart.addEventListener('click', (e)=>{
       
     }else if(e.target.innerHTML == 'Hecho'){
       stopAll(btn1, btn2, minDisplay, secDisplay, 25);
-      console.log('Pomo terminado');
+      resultPomo.classList.add('active');
+      
   }}});
 
-
+  
 
   pomoRest.addEventListener('click', (e)=>{
     const btn1 = pomoRest.children[1].children[0];
@@ -61,11 +72,12 @@ pomoStart.addEventListener('click', (e)=>{
         btn2.innerHTML = 'Hecho';
       }else{
         onTimer=true;
-        counter(minDisplay, secDisplay, 5);
+        counter2(btn1, btn2, minDisplay, secDisplay, 5);
         
         btn1.innerHTML='Pausa'
         btn2.classList.remove('disable');
         btn2.innerHTML = 'Parar';
+        resultPomo.classList.remove('active');
       }         
     }else if(e.target.classList.contains('parar')){
       if (onTimer){
@@ -73,7 +85,7 @@ pomoStart.addEventListener('click', (e)=>{
         
       }else if(e.target.innerHTML == 'Hecho'){
         stopAll(btn1, btn2, minDisplay, secDisplay, 5);
-        console.log('Pomo terminado');
+        resultPomo.classList.add('active');
     }}});
 
 
@@ -91,11 +103,12 @@ pomoStart.addEventListener('click', (e)=>{
           btn2.innerHTML = 'Hecho';
         }else{
           onTimer=true;
-          counter(minDisplay, secDisplay, 15);
+          counter3(btn1, btn2, minDisplay, secDisplay, 15);
           
           btn1.innerHTML='Pausa'
           btn2.classList.remove('disable');
           btn2.innerHTML = 'Parar';
+          resultPomo.classList.remove('active');
         }         
       }else if(e.target.classList.contains('parar')){
         if (onTimer){
@@ -103,7 +116,7 @@ pomoStart.addEventListener('click', (e)=>{
           
         }else if(e.target.innerHTML == 'Hecho'){
           stopAll(btn1, btn2, minDisplay, secDisplay, 15);
-          console.log('Pomo terminado');
+          resultPomo.classList.add('active');
       }}});
 
 
@@ -115,7 +128,17 @@ btnPomo.addEventListener('click', (e)=>{
   let item1 = btnPomo.children[0];
   let item2 = btnPomo.children[1];
   let item3 = btnPomo.children[2];
+
   if (btn == 'Pomodoro'){
+
+    progresBar.classList.add('pomo1')
+    progresBar.classList.remove('pomo2')
+    progresBar.classList.remove('pomo3')
+
+    resultPomo.classList.add('pomo1')
+    resultPomo.classList.remove('pomo2')
+    resultPomo.classList.remove('pomo3')
+
     item1.classList.add('pomo1')
     item2.classList.remove('pomo2')
     item3.classList.remove('pomo3')
@@ -124,6 +147,15 @@ btnPomo.addEventListener('click', (e)=>{
     pomoRestL.classList.remove('active')
     
   }else if(btn == 'Descanso'){
+
+    progresBar.classList.remove('pomo1')
+    progresBar.classList.add('pomo2')
+    progresBar.classList.remove('pomo3')
+
+    resultPomo.classList.remove('pomo1')
+    resultPomo.classList.add('pomo2')
+    resultPomo.classList.remove('pomo3')
+
     item1.classList.remove('pomo1')
     item2.classList.add('pomo2')
     item3.classList.remove('pomo3')
@@ -133,6 +165,15 @@ btnPomo.addEventListener('click', (e)=>{
     
     
   }else if(btn == 'Descanso largo'){
+
+    progresBar.classList.remove('pomo1')
+    progresBar.classList.remove('pomo2')
+    progresBar.classList.add('pomo3')
+
+    resultPomo.classList.remove('pomo1')
+    resultPomo.classList.remove('pomo2')
+    resultPomo.classList.add('pomo3')
+
     item1.classList.remove('pomo1')
     item2.classList.remove('pomo2')
     item3.classList.add('pomo3')
@@ -145,25 +186,116 @@ btnPomo.addEventListener('click', (e)=>{
 
 
 
-const counter = (minDisplay, secDisplay, time)=>{
-  min = time;
+const  counter1 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
+  
   pomo = setInterval(()=>{ 
+
+    
     if(min == 0 && sec == 0){
+      
       clearInterval(pomo)
-      return  console.log('terminado');
+      
+      stopAll(btn1, btn2, minDisplay, secDisplay, time);
+      resultPomo.classList.add('active');
+      
+      return;
+      
     }else if (sec == 0){
       sec = 60;
-      min --; 
+      min --;
+       
+    }else if ( min == time){
+      min--;
+
     }
     sec --
-    if(min == time){
-      min--;
+    if (sec < 10){
+      sec = `0${sec}`;
     }
-
+    progres = ((`${min}.${sec}`*100)/time);
+    progresBar.style.width = `${progres.toFixed(2)}%`;
+    console.log(progres);
+    
+    porcent.innerHTML= progres.toFixed(2) + '%';
     minDisplay.innerHTML = min;
     secDisplay.innerHTML = sec;
+  
+  }, 10);
+}
 
-  }, 1000);
+
+const  counter2 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
+  
+  pomo = setInterval(()=>{ 
+
+    
+    if(minR == 0 && sec == 0){
+      
+      clearInterval(pomo)
+      
+      stopAll(btn1, btn2, minDisplay, secDisplay, time);
+      resultPomo.classList.add('active');
+      
+      return;
+      
+    }else if (sec == 0){
+      sec = 60;
+      minR --;
+       
+    }else if ( minR == time){
+      minR--;
+
+    }
+    sec --
+    if (sec < 10){
+      sec = `0${sec}`;
+    }
+    progres = ((`${minR}.${sec}`*100)/time);
+    progresBar.style.width = `${progres.toFixed(2)}%`;
+    console.log(progres);
+    
+    porcent.innerHTML= progres.toFixed(2) + '%';
+    minDisplay.innerHTML = minR;
+    secDisplay.innerHTML = sec;
+  
+  }, 10);
+}
+
+const  counter3 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
+  
+  pomo = setInterval(()=>{ 
+
+    
+    if(minRL == 0 && sec == 0){
+      
+      clearInterval(pomo)
+      
+      stopAll(btn1, btn2, minDisplay, secDisplay, time);
+      resultPomo.classList.add('active');
+      
+      return;
+      
+    }else if (sec == 0){
+      sec = 60;
+      minRL --;
+       
+    }else if ( minRL == time){
+      minRL--;
+
+    }
+    sec --
+    if (sec < 10){
+      sec = `0${sec}`;
+    }
+    progres = ((`${minRL}.${sec}`*100)/time);
+    progresBar.style.width = `${progres.toFixed(2)}%`;
+    console.log(progres);
+    
+    porcent.innerHTML= progres.toFixed(2) + '%';
+    minDisplay.innerHTML = minRL;
+    secDisplay.innerHTML = sec;
+  
+  }, 10);
 }
 
 
