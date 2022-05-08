@@ -16,7 +16,7 @@ let minR = 5;
 let minRL = 15;
 onTimer = false;
 onActive = false;
-
+velocityTimer = 1000;
 
 
 
@@ -240,7 +240,7 @@ const  counter1 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
     minDisplay.innerHTML = min;
     secDisplay.innerHTML = sec;
   
-  }, 10);
+  }, velocityTimer);
 }
 
 
@@ -278,7 +278,7 @@ const  counter2 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
     minDisplay.innerHTML = minR;
     secDisplay.innerHTML = sec;
   
-  }, 10);
+  }, velocityTimer);
 }
 
 const  counter3 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
@@ -315,7 +315,7 @@ const  counter3 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
     minDisplay.innerHTML = minRL;
     secDisplay.innerHTML = sec;
   
-  }, 10);
+  }, velocityTimer);
 }
 
 
