@@ -108,6 +108,56 @@
     display: block;
 }
 
+
+
+.status{
+    width: 400px;
+    margin: 0 auto;
+    
+}
+
+.status_bar{
+    margin-bottom: 10px;
+    background-color: #b5b0af;
+    border-radius: 10px;
+    position: relative;
+    border: #714b4b 4px solid;
+    
+}
+
+.progres{
+    width: 10%;
+    padding: 20px 0;
+    border-radius: 5px;
+    background-color: #154d62;
+    
+}
+
+.porcent{
+    position: absolute;
+    top: 7px;
+    right: calc(50% - 25px);
+    font-weight: bold;
+    font-size: 25px;
+    color: #fff;
+    text-shadow: 0 0 10px #000;
+}
+
+.status_msg{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #154d62;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 0;
+    display: none;
+}
+
+
+
+
+
 .pomo1{
     background-color: #154d62;
 }
@@ -118,16 +168,6 @@
 .pomo3{
     background-color: #4998a2;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
