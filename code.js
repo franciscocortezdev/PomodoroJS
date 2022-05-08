@@ -14,7 +14,8 @@ let sec = 60;
 let min = 25;
 let minR = 5;
 let minRL = 15;
-onTimer = false
+onTimer = false;
+onActive = false;
 
 
 
@@ -38,7 +39,7 @@ pomoStart.addEventListener('click', (e)=>{
       
     }else{
       onTimer=true;
-      
+      onActive = true;
       counter1(btn1, btn2, minDisplay, secDisplay, 25);
       
       btn1.innerHTML='Pausa'
@@ -131,6 +132,10 @@ btnPomo.addEventListener('click', (e)=>{
 
   if (btn == 'Pomodoro'){
 
+    if(onActive == true){
+     
+
+    }else{ 
     progresBar.classList.add('pomo1')
     progresBar.classList.remove('pomo2')
     progresBar.classList.remove('pomo3')
@@ -145,9 +150,17 @@ btnPomo.addEventListener('click', (e)=>{
     pomoStart.classList.add('active')
     pomoRest.classList.remove('active')
     pomoRestL.classList.remove('active')
-    
+    resultPomo.classList.remove('active');
+    }
   }else if(btn == 'Descanso'){
 
+    if(onActive == true){
+     
+
+    }else{ 
+
+
+    
     progresBar.classList.remove('pomo1')
     progresBar.classList.add('pomo2')
     progresBar.classList.remove('pomo3')
@@ -162,10 +175,16 @@ btnPomo.addEventListener('click', (e)=>{
     pomoRest.classList.add('active')
     pomoStart.classList.remove('active')
     pomoRestL.classList.remove('active')
-    
-    
+    resultPomo.classList.remove('active');
+    }
+
+
   }else if(btn == 'Descanso largo'){
 
+    if(onActive == true){
+     
+
+    }else{ 
     progresBar.classList.remove('pomo1')
     progresBar.classList.remove('pomo2')
     progresBar.classList.add('pomo3')
@@ -180,7 +199,8 @@ btnPomo.addEventListener('click', (e)=>{
     pomoRestL.classList.add('active')
     pomoStart.classList.remove('active')
     pomoRest.classList.remove('active')
-    
+    resultPomo.classList.remove('active');
+    }
 }});
 
 
@@ -214,7 +234,7 @@ const  counter1 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
     }
     progres = ((`${min}.${sec}`*100)/time);
     progresBar.style.width = `${progres.toFixed(2)}%`;
-    console.log(progres);
+    
     
     porcent.innerHTML= progres.toFixed(2) + '%';
     minDisplay.innerHTML = min;
@@ -308,7 +328,11 @@ const  counter3 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
       btn1.innerHTML='Comenzar'
       btn2.innerHTML='Parar'
       btn2.classList.add('disable');
+      
+      progresBar.style.width = `100%`;
+      porcent.innerHTML= '100%';
       onTimer = false;
+      onActive = false;
     }
 
 

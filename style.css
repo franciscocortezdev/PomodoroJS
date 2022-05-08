@@ -15,7 +15,7 @@
 .pomodoro{
 
     width: 400px;
-    
+   
     margin: 40px auto;
     padding: 40px;
     border-radius: 10px;
@@ -155,14 +155,14 @@
 
 
 .active{
-    display: block;
+    display: block;  
 }
 .pomo1{
-    background-color: #154d62;
+    background-color: #154d62;   
 }
 
 .pomo2{
-    background-color: #1a6e7d;
+    background-color: #1a6e7d;   
 }
 .pomo3{
     background-color: #4998a2;
