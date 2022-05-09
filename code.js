@@ -17,6 +17,8 @@ let minRL = 15;
 onTimer = false;
 onActive = false;
 velocityTimer = 1000;
+porcentM = 0;
+porcentS = 0;
 
 
 
@@ -27,9 +29,6 @@ pomoStart.addEventListener('click', (e)=>{
   const minDisplay = pomoStart.children[0].children[0];
   const secDisplay = pomoStart.children[0].children[1];
   
-
-
-
   if(e.target.classList.contains('inicio')){
     if(onTimer){ 
       onTimer = false;
@@ -49,10 +48,10 @@ pomoStart.addEventListener('click', (e)=>{
     }         
   }else if(e.target.classList.contains('parar')){
     if (onTimer){
-      stopAll(btn1, btn2, minDisplay, secDisplay, 25);
+      stopAll1(btn1, btn2, minDisplay, secDisplay, 25);
       
     }else if(e.target.innerHTML == 'Hecho'){
-      stopAll(btn1, btn2, minDisplay, secDisplay, 25);
+      stopAll1(btn1, btn2, minDisplay, secDisplay, 25);
       resultPomo.classList.add('active');
       
   }}});
@@ -73,6 +72,7 @@ pomoStart.addEventListener('click', (e)=>{
         btn2.innerHTML = 'Hecho';
       }else{
         onTimer=true;
+        onActive = true;
         counter2(btn1, btn2, minDisplay, secDisplay, 5);
         
         btn1.innerHTML='Pausa'
@@ -82,10 +82,10 @@ pomoStart.addEventListener('click', (e)=>{
       }         
     }else if(e.target.classList.contains('parar')){
       if (onTimer){
-        stopAll(btn1, btn2, minDisplay, secDisplay, 5);
+        stopAll2(btn1, btn2, minDisplay, secDisplay, 5);
         
       }else if(e.target.innerHTML == 'Hecho'){
-        stopAll(btn1, btn2, minDisplay, secDisplay, 5);
+        stopAll2(btn1, btn2, minDisplay, secDisplay, 5);
         resultPomo.classList.add('active');
     }}});
 
@@ -104,6 +104,7 @@ pomoStart.addEventListener('click', (e)=>{
           btn2.innerHTML = 'Hecho';
         }else{
           onTimer=true;
+          onActive = true;
           counter3(btn1, btn2, minDisplay, secDisplay, 15);
           
           btn1.innerHTML='Pausa'
@@ -113,10 +114,10 @@ pomoStart.addEventListener('click', (e)=>{
         }         
       }else if(e.target.classList.contains('parar')){
         if (onTimer){
-          stopAll(btn1, btn2, minDisplay, secDisplay, 15);
+          stopAll3(btn1, btn2, minDisplay, secDisplay, 15);
           
         }else if(e.target.innerHTML == 'Hecho'){
-          stopAll(btn1, btn2, minDisplay, secDisplay, 15);
+          stopAll3(btn1, btn2, minDisplay, secDisplay, 15);
           resultPomo.classList.add('active');
       }}});
 
@@ -136,6 +137,8 @@ btnPomo.addEventListener('click', (e)=>{
      
 
     }else{ 
+      progresBar.style.width = `0%`;
+      porcent.innerHTML= '0%';
     progresBar.classList.add('pomo1')
     progresBar.classList.remove('pomo2')
     progresBar.classList.remove('pomo3')
@@ -159,7 +162,8 @@ btnPomo.addEventListener('click', (e)=>{
 
     }else{ 
 
-
+      progresBar.style.width = `0%`;
+      porcent.innerHTML= '0%';
     
     progresBar.classList.remove('pomo1')
     progresBar.classList.add('pomo2')
@@ -185,6 +189,8 @@ btnPomo.addEventListener('click', (e)=>{
      
 
     }else{ 
+      progresBar.style.width = `0%`;
+      porcent.innerHTML= '0%';
     progresBar.classList.remove('pomo1')
     progresBar.classList.remove('pomo2')
     progresBar.classList.add('pomo3')
@@ -215,7 +221,7 @@ const  counter1 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
       
       clearInterval(pomo)
       
-      stopAll(btn1, btn2, minDisplay, secDisplay, time);
+      stopAll1(btn1, btn2, minDisplay, secDisplay, time);
       resultPomo.classList.add('active');
       
       return;
@@ -223,24 +229,32 @@ const  counter1 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
     }else if (sec == 0){
       sec = 60;
       min --;
-       
+      
+    }else if(porcentS == 60){
+      porcentM ++;
+      porcentS = 0;
+
     }else if ( min == time){
       min--;
+      porcentS ++;
+    }
+    
+    sec --;
+    
 
+    if (porcentS < 10){
+      porcentS = `0${porcentS}`;
     }
-    sec --
-    if (sec < 10){
-      sec = `0${sec}`;
-    }
-    progres = ((`${min}.${sec}`*100)/time);
-    progresBar.style.width = `${progres.toFixed(2)}%`;
-    
-    
-    porcent.innerHTML= progres.toFixed(2) + '%';
+
+   
+    porcentProgres = ((`${porcentM}.${porcentS}`*100)/time);
+
+    progresBar.style.width = `${porcentProgres.toFixed(2)}%`;
+    porcent.innerHTML= porcentProgres.toFixed(2) + '%';
     minDisplay.innerHTML = min;
     secDisplay.innerHTML = sec;
-  
-  }, velocityTimer);
+    porcentS ++;
+  }, 10);
 }
 
 
@@ -253,7 +267,7 @@ const  counter2 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
       
       clearInterval(pomo)
       
-      stopAll(btn1, btn2, minDisplay, secDisplay, time);
+      stopAll2(btn1, btn2, minDisplay, secDisplay, time);
       resultPomo.classList.add('active');
       
       return;
@@ -262,23 +276,31 @@ const  counter2 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
       sec = 60;
       minR --;
        
+    }else if(porcentS == 60){
+      porcentM ++;
+      porcentS = 0;
+
     }else if ( minR == time){
       minR--;
-
+      porcentS ++;
     }
-    sec --
-    if (sec < 10){
-      sec = `0${sec}`;
-    }
-    progres = ((`${minR}.${sec}`*100)/time);
-    progresBar.style.width = `${progres.toFixed(2)}%`;
-    console.log(progres);
     
-    porcent.innerHTML= progres.toFixed(2) + '%';
+    sec --;
+    
+    if (porcentS < 10){
+      porcentS = `0${porcentS}`;
+    }
+
+
+    porcentProgres = ((`${porcentM}.${porcentS}`*100)/time);
+
+    progresBar.style.width = `${porcentProgres.toFixed(2)}%`;   
+    porcent.innerHTML= porcentProgres.toFixed(2) + '%';
     minDisplay.innerHTML = minR;
     secDisplay.innerHTML = sec;
-  
-  }, velocityTimer);
+    porcentS ++;
+
+  }, 10);
 }
 
 const  counter3 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
@@ -290,7 +312,7 @@ const  counter3 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
       
       clearInterval(pomo)
       
-      stopAll(btn1, btn2, minDisplay, secDisplay, time);
+      stopAll3(btn1, btn2, minDisplay, secDisplay, time);
       resultPomo.classList.add('active');
       
       return;
@@ -299,31 +321,76 @@ const  counter3 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
       sec = 60;
       minRL --;
        
+    }else if(porcentS == 60){
+      porcentM ++;
+      porcentS = 0;
+
     }else if ( minRL == time){
       minRL--;
+      porcentS ++;
+    }
+    sec --;
 
+
+    if (porcentS < 10){
+      porcentS = `0${porcentS}`;
     }
-    sec --
-    if (sec < 10){
-      sec = `0${sec}`;
-    }
-    progres = ((`${minRL}.${sec}`*100)/time);
-    progresBar.style.width = `${progres.toFixed(2)}%`;
-    console.log(progres);
-    
-    porcent.innerHTML= progres.toFixed(2) + '%';
+
+
+    porcentProgres = ((`${porcentM}.${porcentS}`*100)/time);
+
+    progresBar.style.width = `${porcentProgres.toFixed(2)}%`;
+    porcent.innerHTML= porcentProgres.toFixed(2) + '%';
     minDisplay.innerHTML = minRL;
     secDisplay.innerHTML = sec;
-  
-  }, velocityTimer);
+    porcentS ++;
+  }, 10);
 }
 
 
-   const stopAll = (btn1, btn2, minDisplay, secDisplay, time)=>{
+   const stopAll1 = (btn1, btn2, minDisplay, secDisplay, time)=>{
       clearInterval(pomo);
+      porcentM = 0;
+      porcentS = 0; 
       sec = 60;
       min = time;
       minDisplay.innerHTML = min;
+      secDisplay.innerHTML = '00';
+      btn1.innerHTML='Comenzar'
+      btn2.innerHTML='Parar'
+      btn2.classList.add('disable');
+      
+      progresBar.style.width = `100%`;
+      porcent.innerHTML= '100%';
+      onTimer = false;  
+      onActive = false;
+    }
+
+    
+    const stopAll2 = (btn1, btn2, minDisplay, secDisplay, time)=>{
+      clearInterval(pomo);
+      porcentM = 0;
+      porcentS = 0; 
+      sec = 60;
+      minR = time;
+      minDisplay.innerHTML = minR;
+      secDisplay.innerHTML = '00';
+      btn1.innerHTML='Comenzar'
+      btn2.innerHTML='Parar'
+      btn2.classList.add('disable');
+      
+      progresBar.style.width = `100%`;
+      porcent.innerHTML= '100%';
+      onTimer = false;
+      onActive = false;
+    }
+    const stopAll3 = (btn1, btn2, minDisplay, secDisplay, time)=>{
+      clearInterval(pomo);
+      porcentM = 0;
+      porcentS = 0; 
+      sec = 60;
+      minRL = time;
+      minDisplay.innerHTML = minRL;
       secDisplay.innerHTML = '00';
       btn1.innerHTML='Comenzar'
       btn2.innerHTML='Parar'
