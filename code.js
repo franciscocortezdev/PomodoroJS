@@ -254,7 +254,7 @@ const  counter1 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
     minDisplay.innerHTML = min;
     secDisplay.innerHTML = sec;
     porcentS ++;
-  }, 10);
+  }, 1000);
 }
 
 
@@ -300,7 +300,7 @@ const  counter2 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
     secDisplay.innerHTML = sec;
     porcentS ++;
 
-  }, 10);
+  }, 1000);
 }
 
 const  counter3 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
@@ -344,7 +344,7 @@ const  counter3 =  (btn1, btn2, minDisplay, secDisplay, time)=>{
     minDisplay.innerHTML = minRL;
     secDisplay.innerHTML = sec;
     porcentS ++;
-  }, 10);
+  }, 1000);
 }
 
 
